@@ -8,6 +8,16 @@ source ./config.env
 source ../common/function.env
 source ../common/logger.env
 
+config_file=${1}
+if [ ! -e ${config_file} ]
+then
+    echo "usage) create_monit_log.sh <config env file>" > 2&
+    exit 1
+fi
+
+source ${config_file}
+
+
 
 info "create monit log"
 exe kubectl apply -f - <<< "${YML_NAME_SPACE}"
