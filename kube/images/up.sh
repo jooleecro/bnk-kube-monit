@@ -17,12 +17,12 @@ fi
 
 source ${config_file}
 
-exe docker load "./${NAME}/${NAME}.tar.gz"
+exe docker load -i "./${NAME}/${NAME}.tar.gz"
 
 for idx in ${!IMAGE_LIST[*]}
 do
     cur_image=${IMAGE_LIST[${idx}]}
-    to_image="/${REGISTRY}/${cur_image}"
+    to_image="${PRIVATE_REGISTRY}/${cur_image}"
     exe docker tag "${cur_image}" "${to_image}"
     exe docker push "${to_image}"
     exe docker rmi "${cur_image}"
